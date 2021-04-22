@@ -11,9 +11,10 @@ import (
 
 // LogStructure Current log structure
 type LogStructure struct {
-	HasMetrics   bool
-	Categories   []string
-	ResourceType string
+	HasMetrics       bool
+	Categories       []string
+	ResourceType     string
+	ResourceTypeFlat string
 }
 
 var regexGroup, _ = regexp.Compile(`^## ([mM]+icrosoft\.[\w+\/]+)$`)
@@ -32,7 +33,7 @@ func formatName(name string) string {
 func getDefinitions() (map[string]LogStructure, error) {
 	metrics, err := getMetrics()
 	// Getting data from the azure
-	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/platform/resource-logs-categories.md")
+	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/essentials/resource-logs-categories.md")
 	if err != nil {
 		return nil, err
 	}
@@ -68,6 +69,7 @@ func getDefinitions() (map[string]LogStructure, error) {
 			cat.Categories = append(cat.Categories, logCategory[1])
 		} else {
 			cat.ResourceType = resourceName
+			cat.ResourceTypeFlat = strings.Replace(strings.ToLower(strings.Replace(strings.ToLower(strings.Replace(resourceName, ".", "", -1)), "/", "", -1)), "microsoft", "msft", -1)
 			cat.Categories = []string{logCategory[1]}
 			_, cat.HasMetrics = metrics[logName]
 		}
@@ -113,25 +115,33 @@ func Generate() error {
 	if len(outputPath) == 0 {
 		outputPath = "./templates"
 	}
+	os.MkdirAll(fmt.Sprintf("%s/policy_definitions/", outputPath), os.ModePerm)
+	os.MkdirAll(fmt.Sprintf("%s/policy_set_definitions/", outputPath), os.ModePerm)
 	for k, content := range logCategories {
 		available = append(available, content.ResourceType)
-		os.MkdirAll(fmt.Sprintf("%s/%s/", outputPath, k), os.ModePerm)
-		fr, err := os.Create(fmt.Sprintf("%s/%s/rule.json", outputPath, k))
+		fr, err := os.Create(fmt.Sprintf("%s/policy_definitions/policy_definition_%s.tmpl.json", outputPath, k))
 		if err != nil {
 			return err
 		}
 		_ = temp.ExecuteTemplate(fr, ruleTemplate, content)
-		fp, err := os.Create(fmt.Sprintf("%s/%s/parameters.json", outputPath, k))
-		if err != nil {
-			return err
-		}
-		_ = temp.ExecuteTemplate(fp, paramTemplate, nil)
+		// fp, err := os.Create(fmt.Sprintf("%s/%s/parameters.json", outputPath, k))
+		// if err != nil {
+		// 	return err
+		// }
+		// _ = temp.ExecuteTemplate(fp, paramTemplate, nil)
 	}
 	os.MkdirAll(outputPath, os.ModePerm)
-	fa, err := os.Create(fmt.Sprintf("%s/available_resources.json", outputPath))
+	fa, err := os.Create(fmt.Sprintf("%s/policy_set_definitions/policy_set_definition_monitoring.tmpl.json", outputPath))
 	if err != nil {
 		return err
 	}
 	_ = temp.ExecuteTemplate(fa, generatedTemplate, available)
+
+	fp, err := os.Create(fmt.Sprintf("%s/list.json", outputPath))
+	if err != nil {
+		return err
+	}
+	_ = temp.ExecuteTemplate(fp, paramTemplate, available)
+
 	return nil
 }
