@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "AccountLogon",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "AccountManagement",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "DetailTracking",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "DirectoryServiceAccess",
                                     "enabled": true,
@@ -112,9 +104,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "LogonLogoff",
                                     "enabled": true,
@@ -122,9 +112,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "ObjectAccess",
                                     "enabled": true,
@@ -132,9 +120,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "PolicyChange",
                                     "enabled": true,
@@ -142,9 +128,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "PrivilegeUse",
                                     "enabled": true,
@@ -152,9 +136,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "SystemSecurity",
                                     "enabled": true,
@@ -163,10 +145,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

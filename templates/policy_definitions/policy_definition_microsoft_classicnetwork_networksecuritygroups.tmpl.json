@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "Network Security Group Rule Flow Event",
                                     "enabled": true,
@@ -83,10 +81,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

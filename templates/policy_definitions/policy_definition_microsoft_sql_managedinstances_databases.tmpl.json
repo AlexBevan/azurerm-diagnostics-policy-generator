@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "Errors",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "QueryStoreRuntimeStatistics",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "QueryStoreWaitStatistics",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "SQLInsights",
                                     "enabled": true,
@@ -113,10 +105,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

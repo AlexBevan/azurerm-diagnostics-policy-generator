@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "Audit",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Operational",
                                     "enabled": true,
@@ -93,10 +89,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

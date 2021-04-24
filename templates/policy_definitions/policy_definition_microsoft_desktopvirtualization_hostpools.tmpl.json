@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "AgentHealthStatus",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Checkpoint",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Connection",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Error",
                                     "enabled": true,
@@ -112,9 +104,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "HostRegistration",
                                     "enabled": true,
@@ -122,9 +112,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Management",
                                     "enabled": true,
@@ -133,10 +121,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "Engine",
                                     "enabled": true,
@@ -83,19 +81,16 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
-                                    {
-                                        "category": "AllMetrics",
-                                        "enabled": true,
-                                        "retentionPolicy": {
-                                            "enabled": true,
-                                            "days": 0
-                                        }
-                                    }
-                                
+                              {
+                                  "category": "AllMetrics",
+                                  "enabled": true,
+                                  "retentionPolicy": {
+                                      "enabled": true,
+                                      "days": 0
+                                  }
+                              }
                             ]
                           }
                         }

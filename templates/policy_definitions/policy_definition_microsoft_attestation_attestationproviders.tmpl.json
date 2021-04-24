@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "AuditEvent",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "ERR",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "INF",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "WRN",
                                     "enabled": true,
@@ -113,10 +105,8 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
                             ]
                           }
                         }

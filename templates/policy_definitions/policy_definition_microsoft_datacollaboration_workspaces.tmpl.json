@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "CollaborationAudit",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "DataAssets",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Pipelines",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Proposals",
                                     "enabled": true,
@@ -112,9 +104,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "Scripts",
                                     "enabled": true,
@@ -123,19 +113,16 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
-                                    {
-                                        "category": "AllMetrics",
-                                        "enabled": true,
-                                        "retentionPolicy": {
-                                            "enabled": true,
-                                            "days": 0
-                                        }
-                                    }
-                                
+                              {
+                                  "category": "AllMetrics",
+                                  "enabled": true,
+                                  "retentionPolicy": {
+                                      "enabled": true,
+                                      "days": 0
+                                  }
+                              }
                             ]
                           }
                         }

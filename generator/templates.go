@@ -1,7 +1,5 @@
 package generator
 
-import "html/template"
-
 const templateRule = ` {
         "name": "mon-{{.ResourceTypeFlat}}",
         "type": "Microsoft.Authorization/policyDefinitions",
@@ -76,9 +74,7 @@ const templateRule = ` {
                           "dependsOn": [],
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
-                            "logs": [
-                                {{range  $index, $element := .Categories}}
-                                {{if $index}},{{end}}
+                            "logs": [{{range  $index, $element := .Categories}}{{if $index}},{{end}}
                                 {
                                     "category": "{{$element}}",
                                     "enabled": true,
@@ -86,20 +82,17 @@ const templateRule = ` {
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                {{end}}
+                                }{{end}}
                             ],
-                            "metrics": [
-                                {{if .HasMetrics}}
-                                    {
-                                        "category": "AllMetrics",
-                                        "enabled": true,
-                                        "retentionPolicy": {
-                                            "enabled": true,
-                                            "days": 0
-                                        }
-                                    }
-                                {{end}}
+                            "metrics": [{{if .HasMetrics}}
+                              {
+                                  "category": "AllMetrics",
+                                  "enabled": true,
+                                  "retentionPolicy": {
+                                      "enabled": true,
+                                      "days": 0
+                                  }
+                              }{{end}}
                             ]
                           }
                         }
@@ -126,7 +119,7 @@ const templateRule = ` {
       }  
 `
 
-const templateGenerated = `
+const templateRuleSet = `
 {
     "name": "policy-monitoring",
     "type": "Microsoft.Authorization/policySetDefinitions",
@@ -144,48 +137,24 @@ const templateGenerated = `
           "type": "String"
         }
       },
-      "policyDefinitionGroups": null,
-      "policyDefinitions": [{{range  $index, $element := .}}
-
+      "policyDefinitionGroups": null,{{$first := true}}
+      "policyDefinitions": [{{range  $index, $element := .}}{{if $first}}{{$first = false}}{{else}},{{end}}
         {
-          "policyDefinitionReferenceId": "mon-{{.ResourceTypeFlat}}",
+          "policyDefinitionReferenceId": "mon-{{.}}",
           "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-{{.ResourceTypeFlat}}",
           "parameters": {
             "logAnalytics": {
               "value": "[parameters('logAnalytics')]"
             }
           }
-        },{{end}}
+        }{{end}}
       ]
     }
   }
 `
 
-const templateParam = `
-[
-    {{range .}}"mon-{{.}}",
-    {{end}}
+const templateList = `[
+  {{$first := true}}{{range  $k, $v := .}}{{if $first}}{{$first = false}}{{else}},
+  {{end}}"{{$v.ResourceTypeFlat}}"{{end}}
 ]
 `
-
-const (
-	paramTemplate     = "param"
-	ruleTemplate      = "rule"
-	generatedTemplate = "generated"
-)
-
-func getTemplates() (*template.Template, error) {
-	temp, err := template.New(paramTemplate).Parse(templateParam)
-	if err != nil {
-		return temp, err
-	}
-	temp, err = temp.New(ruleTemplate).Parse(templateRule)
-	if err != nil {
-		return temp, err
-	}
-	temp, err = temp.New(generatedTemplate).Parse(templateGenerated)
-	if err != nil {
-		return temp, err
-	}
-	return temp, nil
-}

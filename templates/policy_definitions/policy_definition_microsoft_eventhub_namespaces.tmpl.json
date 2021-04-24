@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "ArchiveLogs",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "AutoScaleLogs",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "CustomerManagedKeyUserLogs",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "EventHubVNetConnectionEvent",
                                     "enabled": true,
@@ -112,9 +104,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "KafkaCoordinatorLogs",
                                     "enabled": true,
@@ -122,9 +112,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "KafkaUserErrorLogs",
                                     "enabled": true,
@@ -132,9 +120,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "OperationalLogs",
                                     "enabled": true,
@@ -143,19 +129,16 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
-                                    {
-                                        "category": "AllMetrics",
-                                        "enabled": true,
-                                        "retentionPolicy": {
-                                            "enabled": true,
-                                            "days": 0
-                                        }
-                                    }
-                                
+                              {
+                                  "category": "AllMetrics",
+                                  "enabled": true,
+                                  "retentionPolicy": {
+                                      "enabled": true,
+                                      "days": 0
+                                  }
+                              }
                             ]
                           }
                         }

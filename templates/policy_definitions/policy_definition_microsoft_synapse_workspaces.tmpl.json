@@ -73,8 +73,6 @@
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                
-                                
                                 {
                                     "category": "BuiltinSqlReqsEnded",
                                     "enabled": true,
@@ -82,9 +80,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "GatewayApiRequests",
                                     "enabled": true,
@@ -92,9 +88,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "IntegrationActivityRuns",
                                     "enabled": true,
@@ -102,9 +96,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "IntegrationPipelineRuns",
                                     "enabled": true,
@@ -112,9 +104,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "IntegrationTriggerRuns",
                                     "enabled": true,
@@ -122,9 +112,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "SQLSecurityAuditEvents",
                                     "enabled": true,
@@ -132,9 +120,7 @@
                                         "days": 0,
                                         "enabled": true
                                     }
-                                }
-                                
-                                ,
+                                },
                                 {
                                     "category": "SynapseRbacOperations",
                                     "enabled": true,
@@ -143,19 +129,16 @@
                                         "enabled": true
                                     }
                                 }
-                                
                             ],
                             "metrics": [
-                                
-                                    {
-                                        "category": "AllMetrics",
-                                        "enabled": true,
-                                        "retentionPolicy": {
-                                            "enabled": true,
-                                            "days": 0
-                                        }
-                                    }
-                                
+                              {
+                                  "category": "AllMetrics",
+                                  "enabled": true,
+                                  "retentionPolicy": {
+                                      "enabled": true,
+                                      "days": 0
+                                  }
+                              }
                             ]
                           }
                         }

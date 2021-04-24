@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -19,18 +20,33 @@ type PolicyStructure struct {
 
 var regexGroup, _ = regexp.Compile(`^## ([mM]+icrosoft\.[\w+\/]+)$`)
 
-var unsupportedResources = map[string]bool{
-	formatName("microsoft.storage/storageaccounts/blobservices"):  false,
-	formatName("microsoft.storage/storageaccounts/fileservices"):  false,
-	formatName("Microsoft.Storage/storageAccounts/queueServices"): false,
-	formatName("Microsoft.Storage/storageAccounts/tableServices"): false,
+var unsupportedResources = []string{
+	"microsoft_storage_storageaccounts_tableservices",
+	"microsoft_storage_storageaccounts_blobservices",
+	"microsoft_storage_storageaccounts_fileservices",
+	"microsoft_storage_storageaccounts_queueservices",
+}
+
+func findUnsupportedResources(slice []string, val string) (int, bool) {
+	for i, item := range slice {
+		if item == val {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+func PrintunsupportedResources() {
+	for _, v := range unsupportedResources {
+		fmt.Println(v)
+	}
 }
 
 func formatName(name string) string {
 	return strings.ToLower(strings.Replace(strings.Replace(name, "/", "_", -1), ".", "_", -1))
 }
 
-func getDefinitions() (map[string]PolicyStructure, error) {
+func GetDefinitions() (map[string]PolicyStructure, error) {
 	metrics, err := getMetrics()
 	// Getting data from the azure
 	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/essentials/resource-logs-categories.md")
@@ -54,7 +70,8 @@ func getDefinitions() (map[string]PolicyStructure, error) {
 			continue
 		}
 		logName := formatName(resourceName)
-		_, unsupported := unsupportedResources[logName]
+
+		_, unsupported := findUnsupportedResources(unsupportedResources, logName)
 		if unsupported {
 			continue
 		}
@@ -100,45 +117,53 @@ func getMetrics() (map[string]bool, error) {
 	return response, nil
 }
 
-// Generate the role definitions
-func Generate() (p map[string]PolicyStructure, err error) {
-	policyCategories, err := getDefinitions()
+func getTemplates() (*template.Template, error) {
+	t, err := template.New("list").Parse(templateList)
 	if err != nil {
-		return nil, err
+		return t, err
 	}
-	temp, err := getTemplates()
+	t, err = t.New("rule").Parse(templateRule)
 	if err != nil {
-		return nil, err
+		return t, err
+	}
+	t, err = t.New("ruleSet").Parse(templateRuleSet)
+	if err != nil {
+		return t, err
+	}
+	return t, nil
+}
+
+// GenerateStandardPolicies produces policy defintions, policyset definition and a list of all the policies, useful for the azurerm-terraform-enterprise-scale module.
+func GenerateStandardPolicies() error {
+	policyDefinitions, err := GetDefinitions()
+	template, err := getTemplates()
+	if err != nil {
+		return err
 	}
 	outputPath := os.Getenv("GENERATOR_OUTPUT_PATH")
-	available := make([]string, 0)
 	if len(outputPath) == 0 {
 		outputPath = "./templates"
 	}
 	os.MkdirAll(fmt.Sprintf("%s/policy_definitions/", outputPath), os.ModePerm)
 	os.MkdirAll(fmt.Sprintf("%s/policy_set_definitions/", outputPath), os.ModePerm)
-	for k, content := range policyCategories {
-		available = append(available, content.ResourceTypeFlat)
+	for k, content := range policyDefinitions {
 		fr, err := os.Create(fmt.Sprintf("%s/policy_definitions/policy_definition_%s.tmpl.json", outputPath, k))
 		if err != nil {
-			return nil, err
+			return err
 		}
-		_ = temp.ExecuteTemplate(fr, ruleTemplate, content)
+		_ = template.ExecuteTemplate(fr, "rule", content)
 	}
 	os.MkdirAll(outputPath, os.ModePerm)
 	fa, err := os.Create(fmt.Sprintf("%s/policy_set_definitions/policy_set_definition_monitoring.tmpl.json", outputPath))
 	if err != nil {
-		return nil, err
+		return err
 	}
-	// _ = temp.ExecuteTemplate(fa, generatedTemplate, available)
-	_ = temp.ExecuteTemplate(fa, generatedTemplate, policyCategories)
-	fmt.Println(policyCategories)
+	_ = template.ExecuteTemplate(fa, "ruleSet", policyDefinitions)
 
 	fp, err := os.Create(fmt.Sprintf("%s/list.json", outputPath))
 	if err != nil {
-		return nil, err
+		return err
 	}
-	_ = temp.ExecuteTemplate(fp, paramTemplate, available)
-
-	return policyCategories, nil
+	_ = template.ExecuteTemplate(fp, "list", policyDefinitions)
+	return nil
 }

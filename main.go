@@ -1,11 +1,14 @@
 package main
 
-//go:generate go run main.go
-
 import (
+	"fmt"
+
 	"github.com/alexbevan/azurerm-monitoring-policy-generator/generator"
 )
 
 func main() {
-	generator.Generate()
+	err := generator.GenerateStandardPolicies()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
