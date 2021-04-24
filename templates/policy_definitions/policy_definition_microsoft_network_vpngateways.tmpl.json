@@ -1,14 +1,10 @@
-package generator
-
-import "html/template"
-
-const templateRule = ` {
-        "name": "mon-{{.ResourceTypeFlat}}",
+ {
+        "name": "mon-msftnetworkvpngateways",
         "type": "Microsoft.Authorization/policyDefinitions",
         "apiVersion": "2019-09-01",
         "properties": {
-            "description": "Apply diagnostic settings for {{.ResourceType}} - Log Analytics",
-          "displayName": "mon-{{.ResourceTypeFlat}}",
+            "description": "Apply diagnostic settings for Microsoft.Network/vpnGateways - Log Analytics",
+          "displayName": "mon-msftnetworkvpngateways",
           "mode": "All",
           "parameters": {
             "logAnalytics": {
@@ -23,7 +19,7 @@ const templateRule = ` {
           "policyRule": {
             "if": {
               "field": "type",
-              "equals": "{{.ResourceType}}"
+              "equals": "Microsoft.Network/vpnGateways"
             },
             "then": {
               "effect": "deployIfNotExists",
@@ -69,7 +65,7 @@ const templateRule = ` {
                       "variables": {},
                       "resources": [
                         {
-                          "type": "{{.ResourceType}}/providers/diagnosticSettings",
+                          "type": "Microsoft.Network/vpnGateways/providers/diagnosticSettings",
                           "apiVersion": "2017-05-01-preview",
                           "name": "[concat(parameters('resourceName'), '/', 'Microsoft.Insights/setByPolicy')]",
                           "location": "[parameters('location')]",
@@ -77,20 +73,50 @@ const templateRule = ` {
                           "properties": {
                             "workspaceId": "[parameters('logAnalytics')]",
                             "logs": [
-                                {{range  $index, $element := .Categories}}
-                                {{if $index}},{{end}}
+                                
+                                
                                 {
-                                    "category": "{{$element}}",
+                                    "category": "GatewayDiagnosticLog",
                                     "enabled": true,
                                     "retentionPolicy": {
                                         "days": 0,
                                         "enabled": true
                                     }
                                 }
-                                {{end}}
+                                
+                                ,
+                                {
+                                    "category": "IKEDiagnosticLog",
+                                    "enabled": true,
+                                    "retentionPolicy": {
+                                        "days": 0,
+                                        "enabled": true
+                                    }
+                                }
+                                
+                                ,
+                                {
+                                    "category": "RouteDiagnosticLog",
+                                    "enabled": true,
+                                    "retentionPolicy": {
+                                        "days": 0,
+                                        "enabled": true
+                                    }
+                                }
+                                
+                                ,
+                                {
+                                    "category": "TunnelDiagnosticLog",
+                                    "enabled": true,
+                                    "retentionPolicy": {
+                                        "days": 0,
+                                        "enabled": true
+                                    }
+                                }
+                                
                             ],
                             "metrics": [
-                                {{if .HasMetrics}}
+                                
                                     {
                                         "category": "AllMetrics",
                                         "enabled": true,
@@ -99,7 +125,7 @@ const templateRule = ` {
                                             "days": 0
                                         }
                                     }
-                                {{end}}
+                                
                             ]
                           }
                         }
@@ -124,68 +150,3 @@ const templateRule = ` {
           }
         }
       }  
-`
-
-const templateGenerated = `
-{
-    "name": "policy-monitoring",
-    "type": "Microsoft.Authorization/policySetDefinitions",
-    "apiVersion": "2019-09-01",
-    "properties": {
-      "description": "This initiative configures application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace.",
-      "displayName": "policy-monitoring",
-      "parameters": {
-        "logAnalytics": {
-          "metadata": {
-            "description": "Select the Log Analytics workspace from dropdown list",
-            "displayName": "Log Analytics workspace",
-            "strongType": "omsWorkspace"
-          },
-          "type": "String"
-        }
-      },
-      "policyDefinitionGroups": null,
-      "policyDefinitions": [{{range  $index, $element := .}}
-
-        {
-          "policyDefinitionReferenceId": "mon-{{.ResourceTypeFlat}}",
-          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-{{.ResourceTypeFlat}}",
-          "parameters": {
-            "logAnalytics": {
-              "value": "[parameters('logAnalytics')]"
-            }
-          }
-        },{{end}}
-      ]
-    }
-  }
-`
-
-const templateParam = `
-[
-    {{range .}}"mon-{{.}}",
-    {{end}}
-]
-`
-
-const (
-	paramTemplate     = "param"
-	ruleTemplate      = "rule"
-	generatedTemplate = "generated"
-)
-
-func getTemplates() (*template.Template, error) {
-	temp, err := template.New(paramTemplate).Parse(templateParam)
-	if err != nil {
-		return temp, err
-	}
-	temp, err = temp.New(ruleTemplate).Parse(templateRule)
-	if err != nil {
-		return temp, err
-	}
-	temp, err = temp.New(generatedTemplate).Parse(templateGenerated)
-	if err != nil {
-		return temp, err
-	}
-	return temp, nil
-}

@@ -1,0 +1,1013 @@
+
+{
+    "name": "policy-monitoring",
+    "type": "Microsoft.Authorization/policySetDefinitions",
+    "apiVersion": "2019-09-01",
+    "properties": {
+      "description": "This initiative configures application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace.",
+      "displayName": "policy-monitoring",
+      "parameters": {
+        "logAnalytics": {
+          "metadata": {
+            "description": "Select the Log Analytics workspace from dropdown list",
+            "displayName": "Log Analytics workspace",
+            "strongType": "omsWorkspace"
+          },
+          "type": "String"
+        }
+      },
+      "policyDefinitionGroups": null,
+      "policyDefinitions": [
+
+        {
+          "policyDefinitionReferenceId": "mon-msftaaddomainservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftaaddomainservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftaadiamtenants",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftaadiamtenants",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftanalysisservicesservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftanalysisservicesservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftapimanagementservice",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftapimanagementservice",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftappconfigurationconfigurationstores",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftappconfigurationconfigurationstores",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftappplatformspring",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftappplatformspring",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftattestationattestationproviders",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftattestationattestationproviders",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftautomationautomationaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftautomationautomationaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftautonomousdevelopmentplatformaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftautonomousdevelopmentplatformaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftbatchbatchaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftbatchbatchaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftbatchaiworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftbatchaiworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftblockchainblockchainmembers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftblockchainblockchainmembers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftblockchaincordamembers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftblockchaincordamembers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftbotservicebotservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftbotservicebotservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcdncdnwebapplicationfirewallpolicies",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcdncdnwebapplicationfirewallpolicies",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcdnprofiles",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcdnprofiles",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcdnprofilesendpoints",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcdnprofilesendpoints",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftclassicnetworknetworksecuritygroups",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftclassicnetworknetworksecuritygroups",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcognitiveservicesaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcognitiveservicesaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcommunicationcommunicationservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcommunicationcommunicationservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcontainerregistryregistries",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcontainerregistryregistries",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcontainerservicemanagedclusters",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcontainerservicemanagedclusters",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftcustomprovidersresourceproviders",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftcustomprovidersresourceproviders",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftd365customerinsightsinstances",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftd365customerinsightsinstances",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatabricksworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatabricksworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatacollaborationworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatacollaborationworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatafactoryfactories",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatafactoryfactories",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatalakeanalyticsaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatalakeanalyticsaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatalakestoreaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatalakestoreaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdatashareaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdatashareaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbformariadbservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbformariadbservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbformysqlflexibleservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbformysqlflexibleservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbformysqlservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbformysqlservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbforpostgresqlflexibleservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbforpostgresqlflexibleservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbforpostgresqlservergroupsv2",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbforpostgresqlservergroupsv2",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbforpostgresqlservers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbforpostgresqlservers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdbforpostgresqlserversv2",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdbforpostgresqlserversv2",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdesktopvirtualizationapplicationgroups",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdesktopvirtualizationapplicationgroups",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdesktopvirtualizationhostpools",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdesktopvirtualizationhostpools",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdesktopvirtualizationworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdesktopvirtualizationworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdeviceselasticpoolsiothubtenants",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdeviceselasticpoolsiothubtenants",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdevicesiothubs",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdevicesiothubs",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdevicesprovisioningservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdevicesprovisioningservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdigitaltwinsdigitaltwinsinstances",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdigitaltwinsdigitaltwinsinstances",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftdocumentdbdatabaseaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftdocumentdbdatabaseaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventgriddomains",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventgriddomains",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventgridpartnernamespaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventgridpartnernamespaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventgridpartnertopics",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventgridpartnertopics",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventgridsystemtopics",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventgridsystemtopics",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventgridtopics",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventgridtopics",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfteventhubnamespaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfteventhubnamespaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftexperimentationexperimentworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftexperimentationexperimentworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfthealthcareapisservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfthealthcareapisservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftinsightsautoscalesettings",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftinsightsautoscalesettings",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftinsightscomponents",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftinsightscomponents",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftkeyvaultmanagedhsms",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftkeyvaultmanagedhsms",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftkeyvaultvaults",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftkeyvaultvaults",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftkustoclusters",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftkustoclusters",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftlogicintegrationaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftlogicintegrationaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftlogicworkflows",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftlogicworkflows",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftmachinelearningservicesworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftmachinelearningservicesworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftmediamediaservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftmediamediaservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkapplicationgateways",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkapplicationgateways",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkazurefirewalls",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkazurefirewalls",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkbastionhosts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkbastionhosts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkexpressroutecircuits",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkexpressroutecircuits",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkfrontdoors",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkfrontdoors",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkloadbalancers",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkloadbalancers",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworknetworksecuritygroups",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworknetworksecuritygroups",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkp2svpngateways",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkp2svpngateways",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkpublicipaddresses",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkpublicipaddresses",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworktrafficmanagerprofiles",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworktrafficmanagerprofiles",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkvirtualnetworkgateways",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkvirtualnetworkgateways",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkvirtualnetworks",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkvirtualnetworks",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnetworkvpngateways",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnetworkvpngateways",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftnotificationhubsnamespaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftnotificationhubsnamespaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftoperationalinsightsworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftoperationalinsightsworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftpowerbitenants",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftpowerbitenants",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftpowerbitenantsworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftpowerbitenantsworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftpowerbidedicatedcapacities",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftpowerbidedicatedcapacities",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftpurviewaccounts",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftpurviewaccounts",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftrecoveryservicesvaults",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftrecoveryservicesvaults",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftrelaynamespaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftrelaynamespaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsearchsearchservices",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsearchsearchservices",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftservicebusnamespaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftservicebusnamespaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsignalrservicesignalr",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsignalrservicesignalr",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsignalrservicewebpubsub",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsignalrservicewebpubsub",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsqlmanagedinstances",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsqlmanagedinstances",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsqlmanagedinstancesdatabases",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsqlmanagedinstancesdatabases",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsqlserversdatabases",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsqlserversdatabases",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftstreamanalyticsstreamingjobs",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftstreamanalyticsstreamingjobs",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsynapseworkspaces",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsynapseworkspaces",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsynapseworkspacesbigdatapools",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsynapseworkspacesbigdatapools",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftsynapseworkspacessqlpools",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftsynapseworkspacessqlpools",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfttimeseriesinsightsenvironments",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfttimeseriesinsightsenvironments",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msfttimeseriesinsightsenvironmentseventsources",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msfttimeseriesinsightsenvironmentseventsources",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftwebhostingenvironments",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftwebhostingenvironments",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftwebsites",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftwebsites",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+
+        {
+          "policyDefinitionReferenceId": "mon-msftwebsitesslots",
+          "policyDefinitionId": "${current_scope_resource_id}/providers/Microsoft.Authorization/policyDefinitions/mon-msftwebsitesslots",
+          "parameters": {
+            "logAnalytics": {
+              "value": "[parameters('logAnalytics')]"
+            }
+          }
+        },
+      ]
+    }
+  }

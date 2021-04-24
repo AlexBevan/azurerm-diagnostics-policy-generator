@@ -9,8 +9,8 @@ import (
 	"strings"
 )
 
-// LogStructure Current log structure
-type LogStructure struct {
+// PolicyStructure Current log structure
+type PolicyStructure struct {
 	HasMetrics       bool
 	Categories       []string
 	ResourceType     string
@@ -30,7 +30,7 @@ func formatName(name string) string {
 	return strings.ToLower(strings.Replace(strings.Replace(name, "/", "_", -1), ".", "_", -1))
 }
 
-func getDefinitions() (map[string]LogStructure, error) {
+func getDefinitions() (map[string]PolicyStructure, error) {
 	metrics, err := getMetrics()
 	// Getting data from the azure
 	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/essentials/resource-logs-categories.md")
@@ -44,7 +44,7 @@ func getDefinitions() (map[string]LogStructure, error) {
 	}
 	content := string(body)
 	var resourceName string = ""
-	response := make(map[string]LogStructure)
+	response := make(map[string]PolicyStructure)
 	for _, line := range strings.Split(content, "\n") {
 		founds := regexGroup.FindAllString(line, 1)
 		if len(founds) > 0 {
@@ -58,7 +58,7 @@ func getDefinitions() (map[string]LogStructure, error) {
 		if unsupported {
 			continue
 		}
-		if !strings.HasPrefix(line, "|") || line == "|---|---|" || line == "|Category|Category Display Name|" {
+		if !strings.HasPrefix(line, "|") || line == "|---|---|" || line == "|---|---|---|" || line == "|Category|Category Display Name|Costs To Export|" {
 			continue
 		}
 		logCategory := strings.Split(line, "|")
@@ -80,7 +80,7 @@ func getDefinitions() (map[string]LogStructure, error) {
 
 func getMetrics() (map[string]bool, error) {
 	// Currently the only way to check whihc resources do support metrics.
-	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/platform/metrics-supported.md")
+	resp, err := http.Get("https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/azure-monitor/essentials/metrics-supported.md")
 	if err != nil {
 		return nil, err
 	}
@@ -101,14 +101,14 @@ func getMetrics() (map[string]bool, error) {
 }
 
 // Generate the role definitions
-func Generate() error {
-	logCategories, err := getDefinitions()
+func Generate() (p map[string]PolicyStructure, err error) {
+	policyCategories, err := getDefinitions()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	temp, err := getTemplates()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	outputPath := os.Getenv("GENERATOR_OUTPUT_PATH")
 	available := make([]string, 0)
@@ -117,31 +117,28 @@ func Generate() error {
 	}
 	os.MkdirAll(fmt.Sprintf("%s/policy_definitions/", outputPath), os.ModePerm)
 	os.MkdirAll(fmt.Sprintf("%s/policy_set_definitions/", outputPath), os.ModePerm)
-	for k, content := range logCategories {
-		available = append(available, content.ResourceType)
+	for k, content := range policyCategories {
+		available = append(available, content.ResourceTypeFlat)
 		fr, err := os.Create(fmt.Sprintf("%s/policy_definitions/policy_definition_%s.tmpl.json", outputPath, k))
 		if err != nil {
-			return err
+			return nil, err
 		}
 		_ = temp.ExecuteTemplate(fr, ruleTemplate, content)
-		// fp, err := os.Create(fmt.Sprintf("%s/%s/parameters.json", outputPath, k))
-		// if err != nil {
-		// 	return err
-		// }
-		// _ = temp.ExecuteTemplate(fp, paramTemplate, nil)
 	}
 	os.MkdirAll(outputPath, os.ModePerm)
 	fa, err := os.Create(fmt.Sprintf("%s/policy_set_definitions/policy_set_definition_monitoring.tmpl.json", outputPath))
 	if err != nil {
-		return err
+		return nil, err
 	}
-	_ = temp.ExecuteTemplate(fa, generatedTemplate, available)
+	// _ = temp.ExecuteTemplate(fa, generatedTemplate, available)
+	_ = temp.ExecuteTemplate(fa, generatedTemplate, policyCategories)
+	fmt.Println(policyCategories)
 
 	fp, err := os.Create(fmt.Sprintf("%s/list.json", outputPath))
 	if err != nil {
-		return err
+		return nil, err
 	}
 	_ = temp.ExecuteTemplate(fp, paramTemplate, available)
 
-	return nil
+	return policyCategories, nil
 }

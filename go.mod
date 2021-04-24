@@ -1,3 +1,3 @@
-module github.com/nepomuceno/terraform-azurerm-monitoring-policies
+module github.com/alexbevan/azurerm-monitoring-policy-generator
 
-go 1.13
+go 1.15
