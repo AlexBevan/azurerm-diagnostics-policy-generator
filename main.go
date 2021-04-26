@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/alexbevan/azurerm-monitoring-policy-generator/generator"
+	"github.com/alexbevan/azurerm-diagnostics-policy-generator/generator"
 )
 
 func main() {
