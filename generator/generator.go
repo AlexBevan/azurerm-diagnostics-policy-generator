@@ -117,18 +117,13 @@ func getMetrics() (map[string]bool, error) {
 	return response, nil
 }
 
-func getTemplates() (*template.Template, error) {
-	t, err := template.New("list").Parse(templateList)
-	if err != nil {
-		return t, err
-	}
-	t, err = t.New("rule").Parse(templateRule)
-	if err != nil {
-		return t, err
-	}
-	t, err = t.New("ruleSet").Parse(templateRuleSet)
-	if err != nil {
-		return t, err
+func getTemplates(templates map[string]string) (*template.Template, error) {
+	t, _ := template.New("dummy").Parse("dummy")
+	for k, v := range templates {
+		t, err := t.New(k).Parse(v)
+		if err != nil {
+			return t, err
+		}
 	}
 	return t, nil
 }
@@ -136,7 +131,13 @@ func getTemplates() (*template.Template, error) {
 // GenerateStandardPolicies produces policy defintions, policyset definition and a list of all the policies, useful for the azurerm-terraform-enterprise-scale module.
 func GenerateStandardPolicies() error {
 	policyDefinitions, err := GetDefinitions()
-	template, err := getTemplates()
+	templatesStandardPolicies := map[string]string{
+		"list":    templateList,
+		"rule":    templateRule,
+		"ruleSet": templateRuleSet,
+	}
+	template, err := getTemplates(templatesStandardPolicies)
+
 	if err != nil {
 		return err
 	}
@@ -165,5 +166,49 @@ func GenerateStandardPolicies() error {
 		return err
 	}
 	_ = template.ExecuteTemplate(fp, "list", policyDefinitions)
+	return nil
+}
+
+// GenerateTerraformPolicies generates the policies compatable with terraform-azurerm-monitoring-policies
+func GenerateTerraformPolicies() error {
+	policyTemplates := map[string]string{
+		"param":     templateParam,
+		"rule":      templateRuleTf,
+		"generated": templateGenerated,
+	}
+	temp, err := getTemplates(policyTemplates)
+	if err != nil {
+		return err
+	}
+	logCategories, err := GetDefinitions()
+	if err != nil {
+		return err
+	}
+
+	outputPath := os.Getenv("GENERATOR_OUTPUT_PATH")
+	available := make([]string, 0)
+	if len(outputPath) == 0 {
+		outputPath = "./templates"
+	}
+	for k, content := range logCategories {
+		available = append(available, content.ResourceType)
+		os.MkdirAll(fmt.Sprintf("%s/%s/", outputPath, k), os.ModePerm)
+		fr, err := os.Create(fmt.Sprintf("%s/%s/rule.json", outputPath, k))
+		if err != nil {
+			return err
+		}
+		_ = temp.ExecuteTemplate(fr, "rule", content)
+		fp, err := os.Create(fmt.Sprintf("%s/%s/parameters.json", outputPath, k))
+		if err != nil {
+			return err
+		}
+		_ = temp.ExecuteTemplate(fp, "param", nil)
+	}
+	os.MkdirAll(outputPath, os.ModePerm)
+	fa, err := os.Create(fmt.Sprintf("%s/available_resources.json", outputPath))
+	if err != nil {
+		return err
+	}
+	_ = temp.ExecuteTemplate(fa, "generated", available)
 	return nil
 }

@@ -11,4 +11,8 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	// err = generator.GenerateTerraformPolicies()
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 }
