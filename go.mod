@@ -1,3 +1,3 @@
-module github.com/alexbevan/azurerm-monitoring-policy-generator
+module github.com/alexbevan/azurerm-diagnostics-policy-generator
 
 go 1.15
